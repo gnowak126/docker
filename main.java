@@ -1,8 +1,8 @@
 import java.sql.*;
 
-public class DockerConnectMySQL {
+public class DockerConnectToMySQL {
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://db:3306/firstdb";
+   static final String DB_URL = "jdbc:mysql://db:3306/database";
 
    static final String USER = "gnowak";
    static final String PASS = "passwd";
@@ -21,11 +21,11 @@ public class DockerConnectMySQL {
       
       sql = "CREATE TABLE IF NOT EXISTS Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) )";
       stmt.executeQuery(sql);
-      sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Nowak', 'Deepak', 'Nadbystrzycka','Lublin');"
+      sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Nowak', 'Deepak', 'Nadbystrzycka','Lublin')";
       stmt.executeQuery(sql);   
-      sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (2, 'Kowalski', 'Jan', 'Lipowa','Lublin');"
+      sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (2, 'Kowalski', 'Jan', 'Lipowa','Lublin')";
       stmt.executeQuery(sql); 
-      sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (3, 'Kowalska', 'Katarzyna', 'Zamkowa','Lublin');"
+      sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (3, 'Kowalska', 'Katarzyna', 'Zamkowa','Lublin')";
       stmt.executeQuery(sql); 
       
       sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
@@ -45,6 +45,35 @@ public class DockerConnectMySQL {
 		 System.out.println(", City: " + city);
       }
       rs.close();
+	   System.out.println("Type Q to exit, or input values in one row in \' \' and separeted by comma");
+
+      String input = System.console().readLine();
+      int count=4;
+      while(input!="Q")
+      {
+	      sql="INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES ("+count+", "+input+");";
+	      stmt.executeQuery(sql); 
+	      sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
+	      rs = stmt.executeQuery(sql);
+
+	      while(rs.next()){
+		 int id  = rs.getInt("PersonID");
+		 String first = rs.getString("FirstName");
+		 String last = rs.getString("LastName");
+			 String address = rs.getString("Address");
+			 String city = rs.getString("City");
+
+		 System.out.println("ID: " + id);
+		 System.out.println(", First: " + first);
+		 System.out.println(", Last: " + last);
+			 System.out.println(", Address: " + address);
+			 System.out.println(", City: " + city);
+	      }
+	      rs.close();
+		   System.out.println("Type Q to exit, or input values in one row in \' \' and separeted by comma");
+	      count++;
+      }
+	      
       stmt.close();
       conn.close();
    }catch(SQLException se){
