@@ -1,8 +1,6 @@
-FROM httpd:latest
+FROM java:8
 LABEL maintainer="GrzegorzNowak"
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y apache2
-RUN apt-get install -y apache2-utils
-EXPOSE 80
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+COPY . /
+WORKDIR /
+RUN javac main.java
+CMD ["java", "-classpath", "mysql-connector-java-5.1.6.jar:.","DockerConnectMySQL"]
