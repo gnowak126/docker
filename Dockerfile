@@ -3,4 +3,4 @@ LABEL maintainer="GrzegorzNowak"
 COPY . /
 WORKDIR /  
 RUN javac DockerConnectToMySQL.java
-CMD ["java", "-classpath", "mysql-connector-java-5.1.6.jar:.","DockerConnectToMySQL"]
+CMD ["java", "-classpath", "mysql-connector-java-8.0.13.jar:.","DockerConnectToMySQL"]
