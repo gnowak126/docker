@@ -10,6 +10,7 @@ public class DockerConnectToMySQL {
    public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
+   System.out.println("Java application is ready tu use. Press ENTER to start.");
    System.console().readLine();
    try{
       Class.forName("com.mysql.jdbc.Driver");
@@ -22,7 +23,7 @@ public class DockerConnectToMySQL {
                 break;
             } catch (SQLException se) {
                 System.out.println(se);
-		System.out.println("Program will try to connect again in 5 seconds.");
+		System.out.println("Database is not yet ready to connect. Application will try to connect again in 5 seconds.");
             }
             Thread.sleep(5000);
         }
