@@ -47,8 +47,8 @@ public class DockerConnectToMySQL {
 
       while(rs.next()){
          int id  = rs.getInt("id");
-         String name = rs.getString("surname");
-         String surname = rs.getString("name");
+         String name = rs.getString("name");
+         String surname = rs.getString("surname");
 
          System.out.println("ID: " + id +", Name: " + name+ ", Surname: " + surname);
       }
@@ -68,10 +68,11 @@ public class DockerConnectToMySQL {
 	      sql = "SELECT id, surname, name FROM Persons";
           rs = stmt.executeQuery(sql);
 	    while(rs.next()){
-	    	int id  = rs.getInt("id");
-	    	String first = rs.getString("surname");
-	    	String last = rs.getString("name");
-            System.out.println("ID: " + id +", Name: " + name+ ", Surname: " + surname);
+		 id  = rs.getInt("id");
+		 name = rs.getString("name");
+		 surname = rs.getString("surname");
+
+		 System.out.println("ID: " + id +", Name: " + name+ ", Surname: " + surname);
 	    }
 	      rs.close();
 	      System.out.println("Type Q to exit, or input values in one row in \' \' and separeted by comma");
