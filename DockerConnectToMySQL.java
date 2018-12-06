@@ -20,6 +20,8 @@ public class DockerConnectToMySQL {
       stmt = conn.createStatement();
       String sql;
       
+      sql = "DROP TABLE IF EXISTS Persons";
+      stmt.executeQuery(sql);
       sql = "CREATE TABLE IF NOT EXISTS Persons (id int, name varchar(255), surname varchar(255))";
       stmt.executeQuery(sql);
       sql = "INSERT INTO Persons (id, name, surname) VALUES (1, 'Grzegorz', 'Nowak')";
@@ -40,7 +42,7 @@ public class DockerConnectToMySQL {
          System.out.println("ID: " + id +", Name: " + name+ ", LasSurnamet: " + surname);
       }
       rs.close();
-	   System.out.println("Type Q to exit, or input values in one row in \' \' and separeted by comma");
+	   System.out.println("Type Q to exit, or input values in one row in a form '<name>', '<surname>'");
 
       String input = System.console().readLine();
       int count=4;
