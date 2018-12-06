@@ -52,7 +52,7 @@ public class DockerConnectToMySQL {
 
       String input = System.console().readLine();
       int count=4;
-      while(input.toUpperCase().equals("Q"))
+      while(!input.toUpperCase().equals("Q"))
       {
         try {
 	      sql="INSERT INTO Persons (id, name, surname) VALUES ("+count+", "+input+");";
