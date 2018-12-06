@@ -39,10 +39,10 @@ public class DockerConnectToMySQL {
          String name = rs.getString("surname");
          String surname = rs.getString("name");
 
-         System.out.println("ID: " + id +", Name: " + name+ ", LasSurnamet: " + surname);
+         System.out.println("ID: " + id +", Name: " + name+ ", Surname: " + surname);
       }
       rs.close();
-	   System.out.println("Type Q to exit, or input values in a form: '<name>', '<surname>'");
+	 System.out.println("Type Q to exit, or input values in one row in a form '<name>', '<surname>'");
 
       String input = System.console().readLine();
       int count=4;
@@ -53,26 +53,17 @@ public class DockerConnectToMySQL {
 	      stmt.executeQuery(sql);
         } catch (SQLException se) {
             System.out.println(se);
-        }
-
-         
+        }         
 	      sql = "SELECT id, surname, name FROM Persons";
           rs = stmt.executeQuery(sql);
 	    while(rs.next()){
-		 int id  = rs.getInt("id");
-		 String first = rs.getString("surname");
-		 String last = rs.getString("name");
-			 String address = rs.getString("Address");
-			 String city = rs.getString("City");
-
-		 System.out.println("ID: " + id);
-		 System.out.println(", First: " + first);
-		 System.out.println(", Last: " + last);
-			 System.out.println(", Address: " + address);
-			 System.out.println(", City: " + city);
-	      }
+	    	int id  = rs.getInt("id");
+	    	String first = rs.getString("surname");
+	    	String last = rs.getString("name");
+            System.out.println("ID: " + id +", Name: " + name+ ", Surname: " + surname);
+	    }
 	      rs.close();
-		   System.out.println("Type Q to exit, or input values in a form: '<name>', '<surname>'");
+	      System.out.println("Type Q to exit, or input values in one row in \' \' and separeted by comma");
 	      count++;
       }
 	      
