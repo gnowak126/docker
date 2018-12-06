@@ -23,7 +23,7 @@ public class DockerConnectToMySQL {
                 break;
             } catch (SQLException se) {
                 System.out.println(se);
-		System.out.println("Database is not yet ready to connect. Application will try to connect again in 5 seconds.");
+		System.out.println("Database is not ready to connect. Application will try to connect again in 5 seconds...");
             }
             Thread.sleep(5000);
         }
