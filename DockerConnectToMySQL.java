@@ -16,6 +16,16 @@ public class DockerConnectToMySQL {
 
       System.out.println("Connecting to database...");
       conn = DriverManager.getConnection(DB_URL,USER,PASS);
+        for (;;) {
+            try {
+                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                break;
+            } catch (SQLException se) {
+                System.out.println(se);
+		System.out.println("Program will try to connect again in 5 seconds.");
+            }
+            Thread.sleep(5000);
+        }
 
       stmt = conn.createStatement();
       String sql;
