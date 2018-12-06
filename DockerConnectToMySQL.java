@@ -16,7 +16,6 @@ public class DockerConnectToMySQL {
       Class.forName("com.mysql.jdbc.Driver");
 
       System.out.println("Connecting to database...");
-      conn = DriverManager.getConnection(DB_URL,USER,PASS);
         for (;;) {
             try {
                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -32,15 +31,15 @@ public class DockerConnectToMySQL {
       String sql;
       
       sql = "DROP TABLE IF EXISTS Persons";
-      stmt.executeQuery(sql);
+      stmt.executeUpdate(sql);
       sql = "CREATE TABLE IF NOT EXISTS Persons (id int, name varchar(255), surname varchar(255))";
-      stmt.executeQuery(sql);
+      stmt.executeUpdate(sql);
       sql = "INSERT INTO Persons (id, name, surname) VALUES (1, 'Grzegorz', 'Nowak')";
-      stmt.executeQuery(sql);   
+      stmt.executeUpdate(sql);   
       sql = "INSERT INTO Persons (id, name, surname) VALUES (2, 'Jan', 'Kowalski')";
-      stmt.executeQuery(sql); 
+      stmt.executeUpdate(sql); 
       sql = "INSERT INTO Persons (id, name, surname) VALUES (3, 'Katarzyna', 'Kowalska')";
-      stmt.executeQuery(sql); 
+      stmt.executeUpdate(sql); 
       
       sql = "SELECT id, surname, name FROM Persons";
       ResultSet rs = stmt.executeQuery(sql);
@@ -57,12 +56,12 @@ public class DockerConnectToMySQL {
       {
         try {
 	      sql="INSERT INTO Persons (id, name, surname) VALUES ("+count+", "+input+");";
-	      stmt.executeQuery(sql);
+	      stmt.executeUpdate(sql);
         } catch (SQLException se) {
             System.out.println(se);
         }         
 	      sql = "SELECT id, surname, name FROM Persons";
-          rs = stmt.executeQuery(sql);
+          rs = stmt.executeUpdate(sql);
 	    while(rs.next()){
 		 System.out.println("ID: " + rs.getInt("id") +", Name: " + rs.getString("name")+ ", Surname: " + rs.getString("surname"));
 	    }
