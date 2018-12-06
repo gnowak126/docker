@@ -68,7 +68,7 @@ public class DockerConnectToMySQL {
 	      rs.close();
 	      System.out.println("Type Q to exit, or input values in one row in \' \' and separeted by comma");
 	      count++;
-	  String input = System.console().readLine();
+	  input = System.console().readLine();
       }
 	      
       stmt.close();
