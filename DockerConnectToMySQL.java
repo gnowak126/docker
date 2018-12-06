@@ -61,7 +61,7 @@ public class DockerConnectToMySQL {
             System.out.println(se);
         }         
 	      sql = "SELECT id, surname, name FROM Persons";
-          rs = stmt.executeUpdate(sql);
+          rs = stmt.executeQuery(sql);
 	    while(rs.next()){
 		 System.out.println("ID: " + rs.getInt("id") +", Name: " + rs.getString("name")+ ", Surname: " + rs.getString("surname"));
 	    }
