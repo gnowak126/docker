@@ -53,7 +53,7 @@ public class DockerConnectToMySQL {
          System.out.println("ID: " + id +", Name: " + name+ ", Surname: " + surname);
       }
       rs.close();
-	 System.out.println("Type Q to exit, or input values in one row in a form '<name>', '<surname>'");
+	 System.out.println("Type Q to exit, or input values in one row in a form: '<name>', '<surname>'");
 
       String input = System.console().readLine();
       int count=4;
