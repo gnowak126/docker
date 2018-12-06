@@ -48,11 +48,11 @@ public class DockerConnectToMySQL {
          System.out.println("ID: " + rs.getInt("id") +", Name: " + rs.getString("name")+ ", Surname: " + rs.getString("surname"));
       }
       rs.close();
-	 System.out.println("Type Q to exit, or input values in one row in a form: '<name>', '<surname>'");
+	 System.out.println("Type 'Q' or 'q' to exit, or input values in one row in a form: '<name>', '<surname>'");
 
       String input = System.console().readLine();
       int count=4;
-      while(input!="Q")
+      while(input.toUpperCase().equals("Q"))
       {
         try {
 	      sql="INSERT INTO Persons (id, name, surname) VALUES ("+count+", "+input+");";
@@ -66,7 +66,7 @@ public class DockerConnectToMySQL {
 		 System.out.println("ID: " + rs.getInt("id") +", Name: " + rs.getString("name")+ ", Surname: " + rs.getString("surname"));
 	    }
 	      rs.close();
-	      System.out.println("Type Q to exit, or input values in one row in \' \' and separeted by comma");
+	 System.out.println("Type 'Q' or 'q' to exit, or input values in one row in a form: '<name>', '<surname>'");
 	      count++;
 	  input = System.console().readLine();
       }
