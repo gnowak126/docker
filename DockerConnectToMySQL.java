@@ -10,7 +10,6 @@ public class DockerConnectToMySQL {
    public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
-   System.out.println("Java application is ready tu use. Press ENTER to start.");
    System.console().readLine();
    try{
       Class.forName("com.mysql.jdbc.Driver");
@@ -30,39 +29,40 @@ public class DockerConnectToMySQL {
       stmt = conn.createStatement();
       String sql;
       
-      sql = "DROP TABLE IF EXISTS Persons";
+      sql = "DROP TABLE IF EXISTS Persons"; //drop table, so that every run looks the same
       stmt.executeUpdate(sql);
-      sql = "CREATE TABLE IF NOT EXISTS Persons (id int, name varchar(255), surname varchar(255))";
+      sql = "CREATE TABLE IF NOT EXISTS Persons (id int, name varchar(255), surname varchar(255))"; //create table
+      //3 colums: id, name and surname
       stmt.executeUpdate(sql);
-      sql = "INSERT INTO Persons (id, name, surname) VALUES (1, 'Grzegorz', 'Nowak')";
+      sql = "INSERT INTO Persons (id, name, surname) VALUES (1, 'Grzegorz', 'Nowak')"; //3 first inserts
       stmt.executeUpdate(sql);   
       sql = "INSERT INTO Persons (id, name, surname) VALUES (2, 'Jan', 'Kowalski')";
       stmt.executeUpdate(sql); 
       sql = "INSERT INTO Persons (id, name, surname) VALUES (3, 'Katarzyna', 'Kowalska')";
       stmt.executeUpdate(sql); 
       
-      sql = "SELECT id, surname, name FROM Persons";
+      sql = "SELECT id, surname, name FROM Persons"; //select on db
       ResultSet rs = stmt.executeQuery(sql);
 
-      while(rs.next()){
+      while(rs.next()){ //select display loop
          System.out.println("ID: " + rs.getInt("id") +", Name: " + rs.getString("name")+ ", Surname: " + rs.getString("surname"));
       }
       rs.close();
 	 System.out.println("Type 'Q' or 'q' to exit, or input values in one row in a form: '<name>', '<surname>'");
 
-      String input = System.console().readLine();
+      String input = System.console().readLine(); //readeing input
       int count=4;
-      while(!input.toUpperCase().equals("Q"))
+      while(!input.toUpperCase().equals("Q")) //insert loop, out on q or Q
       {
         try {
-	      sql="INSERT INTO Persons (id, name, surname) VALUES ("+count+", "+input+");";
+	      sql="INSERT INTO Persons (id, name, surname) VALUES ("+count+", "+input+");"; //insert values from input
 	      stmt.executeUpdate(sql);
         } catch (SQLException se) {
             System.out.println(se);
         }         
-	      sql = "SELECT id, surname, name FROM Persons";
+	      sql = "SELECT id, surname, name FROM Persons"; //select on db
           rs = stmt.executeQuery(sql);
-	    while(rs.next()){
+	    while(rs.next()){ //select display loop
 		 System.out.println("ID: " + rs.getInt("id") +", Name: " + rs.getString("name")+ ", Surname: " + rs.getString("surname"));
 	    }
 	      rs.close();
