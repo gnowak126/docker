@@ -42,7 +42,7 @@ public class DockerConnectToMySQL {
          System.out.println("ID: " + id +", Name: " + name+ ", LasSurnamet: " + surname);
       }
       rs.close();
-	   System.out.println("Type Q to exit, or input values in one row in a form '<name>', '<surname>'");
+	   System.out.println("Type Q to exit, or input values in a form: '<name>', '<surname>'");
 
       String input = System.console().readLine();
       int count=4;
@@ -72,7 +72,7 @@ public class DockerConnectToMySQL {
 			 System.out.println(", City: " + city);
 	      }
 	      rs.close();
-		   System.out.println("Type Q to exit, or input values in one row in \' \' and separeted by comma");
+		   System.out.println("Type Q to exit, or input values in a form: '<name>', '<surname>'");
 	      count++;
       }
 	      
