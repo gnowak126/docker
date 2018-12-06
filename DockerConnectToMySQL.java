@@ -10,6 +10,7 @@ public class DockerConnectToMySQL {
    public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
+   System.console().readLine();
    try{
       Class.forName("com.mysql.jdbc.Driver");
 
@@ -19,30 +20,24 @@ public class DockerConnectToMySQL {
       stmt = conn.createStatement();
       String sql;
       
-      sql = "CREATE TABLE IF NOT EXISTS Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) )";
+      sql = "CREATE TABLE IF NOT EXISTS Persons (id int, name varchar(255), surname varchar(255))";
       stmt.executeQuery(sql);
-      sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Nowak', 'Deepak', 'Nadbystrzycka','Lublin')";
+      sql = "INSERT INTO Persons (id, name, surname) VALUES (1, 'Grzegorz', 'Nowak')";
       stmt.executeQuery(sql);   
-      sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (2, 'Kowalski', 'Jan', 'Lipowa','Lublin')";
+      sql = "INSERT INTO Persons (id, name, surname) VALUES (2, 'Jan', 'Kowalski')";
       stmt.executeQuery(sql); 
-      sql = "INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (3, 'Kowalska', 'Katarzyna', 'Zamkowa','Lublin')";
+      sql = "INSERT INTO Persons (id, name, surname) VALUES (3, 'Katarzyna', 'Kowalska')";
       stmt.executeQuery(sql); 
       
-      sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
+      sql = "SELECT id, surname, name FROM Persons";
       ResultSet rs = stmt.executeQuery(sql);
 
       while(rs.next()){
-         int id  = rs.getInt("PersonID");
-         String first = rs.getString("FirstName");
-         String last = rs.getString("LastName");
-		 String address = rs.getString("Address");
-		 String city = rs.getString("City");
+         int id  = rs.getInt("id");
+         String name = rs.getString("surname");
+         String surname = rs.getString("name");
 
-         System.out.println("ID: " + id);
-         System.out.println(", First: " + first);
-         System.out.println(", Last: " + last);
-		 System.out.println(", Address: " + address);
-		 System.out.println(", City: " + city);
+         System.out.println("ID: " + id +", Name: " + name+ ", LasSurnamet: " + surname);
       }
       rs.close();
 	   System.out.println("Type Q to exit, or input values in one row in \' \' and separeted by comma");
@@ -51,15 +46,20 @@ public class DockerConnectToMySQL {
       int count=4;
       while(input!="Q")
       {
-	      sql="INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES ("+count+", "+input+");";
-	      stmt.executeQuery(sql); 
-	      sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
-	      rs = stmt.executeQuery(sql);
+        try {
+	      sql="INSERT INTO Persons (id, name, surname) VALUES ("+count+", "+input+");";
+	      stmt.executeQuery(sql);
+        } catch (SQLException se) {
+            System.out.println(se);
+        }
 
-	      while(rs.next()){
-		 int id  = rs.getInt("PersonID");
-		 String first = rs.getString("FirstName");
-		 String last = rs.getString("LastName");
+         
+	      sql = "SELECT id, surname, name FROM Persons";
+          rs = stmt.executeQuery(sql);
+	    while(rs.next()){
+		 int id  = rs.getInt("id");
+		 String first = rs.getString("surname");
+		 String last = rs.getString("name");
 			 String address = rs.getString("Address");
 			 String city = rs.getString("City");
 
